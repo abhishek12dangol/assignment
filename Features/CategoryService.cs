@@ -1,14 +1,14 @@
 namespace CJTPService;
-
 public class CategoryService
 {
     private List<Category> categories = new()
     {
-        new Category { Cid = 1, Name = "Beverages"}, 
-        new Category { Cid = 2, Name = "Condiments"},
-        new Category { Cid = 3, Name = "Confections"}
+        new Category { Cid = 1, Name = "Beverages" },
+        new Category { Cid = 2, Name = "Condiments "},
+        new Category { Cid = 3, Name = "Confections" }
     };
-    public List<Category> GetCategories() => categories;
+
+    public List<Category> GetCategories() => categories; 
     public Category? GetCategory(int cid) => categories.FirstOrDefault(c => c.Cid == cid);
 
     public bool UpdateCategory(int id, string newName)
