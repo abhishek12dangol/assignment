@@ -1,19 +1,23 @@
-namespace CJTPService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Features;
+
 public class CategoryService
 {
     private List<Category> categories = new()
     {
-        new Category { Cid = 1, Name = "Beverages" },
-        new Category { Cid = 2, Name = "Condiments "},
-        new Category { Cid = 3, Name = "Confections" }
+        new Category { Id = 1, Name = "Beverages" },
+        new Category { Id = 2, Name = "Condiments"},
+        new Category { Id = 3, Name = "Confections" }
     };
 
     public List<Category> GetCategories() => categories; 
-    public Category? GetCategory(int cid) => categories.FirstOrDefault(c => c.Cid == cid);
+    public Category? GetCategory(int cid) => categories.FirstOrDefault(c => c.Id == cid);
 
     public bool UpdateCategory(int id, string newName)
     {
-        var c = categories.FirstOrDefault(x => x.Cid == id);
+        var c = categories.FirstOrDefault(x => x.Id == id);
         if (c == null) return false;
         c.Name = newName;
         return true;
@@ -21,7 +25,7 @@ public class CategoryService
 
     public bool DeleteCategory(int id)
     {
-        var c = categories.FirstOrDefault(x => x.Cid == id);
+        var c = categories.FirstOrDefault(x => x.Id == id);
         if (c == null) return false;
         categories.Remove(c);
         return true;
@@ -29,7 +33,9 @@ public class CategoryService
 
     public bool CreateCategory(int id, string name)
     {
-        categories.Add(new Category { Cid = id, Name = name});
+        if (categories.Any(x => x.Id == id))
+            return false;
+        categories.Add(new Category { Id = id, Name = name});
         return true;
     }
 }
